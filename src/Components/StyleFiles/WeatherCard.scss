@@ -1,7 +1,9 @@
 .searchForm {
     z-index: 5;
-    margin-top: 2rem;
+    position: relative;
     margin-bottom: 3rem;
+    margin-top: 10rem;
+    
         
 
     input[type='text'] {
@@ -21,6 +23,7 @@
         &::placeholder{
             color: #adb5bd;
             font-weight: 700;
+            font-size: 0.6rem;
         }
     }
     button{
@@ -44,8 +47,6 @@
     background-repeat: no-repeat;
     border-radius: 10px;
     position: relative;
-
-
 
     .overlay {
         position: absolute;

@@ -1,12 +1,10 @@
-import WeatherCard from './Components/WeatherCard';
-import WeatherLoader from './Components/WeatherLoader';
+import Combined from "./Components/Combined"
 
 function App() {
 
   return (
     <>
-  <WeatherCard/>
-  {/* <WeatherLoader/> */}
+    <Combined/>
     </>
   )
 }

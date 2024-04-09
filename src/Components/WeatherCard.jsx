@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import useAPiFetch from './ApiFetchHook.js'
 import './StyleFiles/WeatherCard.scss'
 import WeatherLoader from './WeatherLoader.jsx';
+import Navbar from './Navbar.jsx';
 
 export default function WeatherCard() {
 
@@ -38,7 +39,7 @@ export default function WeatherCard() {
         if (location == '') {
             toast.warn(data.message)
         }
-        else if(data.cod == 404){
+        else if (data.cod == 404) {
             toast.warn('City Not Found')
         }
     };
@@ -64,14 +65,29 @@ export default function WeatherCard() {
         <>
             <div className="container-fluid px-0 d-flex justify-content-center" style={{ flexDirection: 'column' }}>
 
-                <div className="container row">
-                    <div className="col-12 d-flex justify-content-center">
-                        <form onSubmit={tempSearch} className={`searchForm  ${ifValuePresent ? '' : 'position-fixed b'}`}>
-                            <input type="text" placeholder='Enter City Name (Eg. Kolkata, London, etc.)' value={location} onChange={(event) => setLocation(event.target.value)} />
-                            <button type="submit" id='searchBtn'>
-                                <i className="fa-solid fa-magnifying-glass fs-5"></i>
-                            </button>
-                        </form>
+
+                <div className="row">
+                    <div className="col-12">
+                        <Navbar />
+                    </div>
+                </div>
+
+
+
+                <div className="row">
+                    <div className="col-12 ">
+                        <div className="container  ">
+                            <div className="row">
+                                <div className="col-12 d-flex justify-content-center">
+                                    <form onSubmit={tempSearch} className={`searchForm  ${ifValuePresent ? '' : 'position-fixed b'}`}>
+                                        <input type="text" placeholder='Enter City Name (Eg. Kolkata, London, etc.)' value={location} onChange={(event) => setLocation(event.target.value)} />
+                                        <button type="submit" id='searchBtn'>
+                                            <i className="fa-solid fa-magnifying-glass fs-5"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -88,7 +104,8 @@ export default function WeatherCard() {
                             <div className="weatherCardContainer" style={{
                                 backgroundImage: `url(${tempDescription == 'Clouds' ? 'https://i.pinimg.com/originals/67/24/49/6724494d5d5ad8d046745f078887a86a.gif' :
                                     tempDescription == 'Rain' ? 'https://i.gifer.com/QAOA.gif' :
-                                        tempDescription == 'Clear' ? 'https://i.pinimg.com/originals/c8/ba/30/c8ba30ee61944cc26dbde4022a0a4b72.gif' : ''
+                                        tempDescription == 'Clear' ? 'https://i.pinimg.com/originals/c8/ba/30/c8ba30ee61944cc26dbde4022a0a4b72.gif' :
+                                            tempDescription == 'Snow' ? 'https://miro.medium.com/v2/resize:fit:1000/1*68XjfEwyVMHhQc5LdAlyFQ.gif' : ''
 
                                     })`
                             }}>
@@ -145,7 +162,8 @@ export default function WeatherCard() {
                                                     ${desc == '' ? 'fa-solid fa-xmark text-danger' :
                                                                                     desc == 'Clouds' ? 'fa-solid fa-cloud text-secondary' :
                                                                                         desc == 'Rain' ? 'fa-solid fa-cloud-rain text-info' :
-                                                                                            desc == 'Clear' ? 'fa-solid fa-sun' : ''
+                                                                                            desc == 'Snow' ? 'fa-solid fa-snowman text-info' :
+                                                                                                desc == 'Clear' ? 'fa-solid fa-sun' : ''
                                                                                 } fs-3 my-2`}></i>}</div>
 
                                                                             <div className="time">{temps.dt_txt.split(' ')[1]}</div>
@@ -175,7 +193,7 @@ export default function WeatherCard() {
 
                 <ToastContainer
                     position="top-center"
-                    autoClose={5000}
+                    autoClose={4000}
                     hideProgressBar={false}
                     newestOnTop={false}
                     closeOnClick
@@ -184,7 +202,7 @@ export default function WeatherCard() {
                     draggable
                     pauseOnHover
                     theme="light"
-                    transition:Bounce/>
+                    transition:Bounce />
             </div>
         </>
     )
