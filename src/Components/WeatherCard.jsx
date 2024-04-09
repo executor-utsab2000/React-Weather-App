@@ -66,7 +66,7 @@ export default function WeatherCard() {
 
                 <div className="container row">
                     <div className="col-12 d-flex justify-content-center">
-                        <form onSubmit={tempSearch} className='searchForm'>
+                        <form onSubmit={tempSearch} className={`searchForm  ${ifValuePresent ? '' : 'position-fixed b'}`}>
                             <input type="text" placeholder='Enter City Name (Eg. Kolkata, London, etc.)' value={location} onChange={(event) => setLocation(event.target.value)} />
                             <button type="submit" id='searchBtn'>
                                 <i className="fa-solid fa-magnifying-glass fs-5"></i>
