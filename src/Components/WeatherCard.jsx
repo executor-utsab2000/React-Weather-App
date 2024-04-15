@@ -23,7 +23,7 @@ export default function WeatherCard() {
 
     // console.log(data);
     // const data = useAPiFetch(location)
-    
+
     const tempSearch = (event) => {
         console.log(location);
         setValuePresent(false)
@@ -32,27 +32,27 @@ export default function WeatherCard() {
         let apiId = "3e7be884167e55c7191a73cfa5b76965";
         let fullURL = `${url}&appid=${apiId}`;
         // console.log(fullURL)
-        
+
         fetch(fullURL)
-        .then((res)=> res.json())
-        .then((data)=> {
-            if (data && data.list) {
-                console.log(data);
-                setValuePresent(true)
-                setWeatherData(data)
-                setWeatherDataList(data.list);
-                setTempDescription(data.list[0].weather[0].main)
-            }
-            if (location == '') {
-                toast.warn(data.message)
-            }
-            else if (data.cod == 404) {
-                toast.warn('City Not Found')
-            }
-        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data && data.list) {
+                    console.log(data);
+                    setValuePresent(true)
+                    setWeatherData(data)
+                    setWeatherDataList(data.list);
+                    setTempDescription(data.list[0].weather[0].main)
+                }
+                if (location == '') {
+                    toast.warn(data.message)
+                }
+                else if (data.cod == 404) {
+                    toast.warn('City Not Found')
+                }
+            })
 
 
-        
+
     };
 
 
