@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import useAPiFetch from './ApiFetchHook.js'
+// import useAPiFetch from './ApiFetchHook.js'
 import './StyleFiles/WeatherCard.scss'
 import WeatherLoader from './WeatherLoader.jsx';
 import Navbar from './Navbar.jsx';
@@ -21,27 +21,38 @@ export default function WeatherCard() {
 
 
 
-    const data = useAPiFetch(location)
     // console.log(data);
-
+    // const data = useAPiFetch(location)
+    
     const tempSearch = (event) => {
+        console.log(location);
         setValuePresent(false)
         event.preventDefault();
+        let url = `https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${location}`;
+        let apiId = "3e7be884167e55c7191a73cfa5b76965";
+        let fullURL = `${url}&appid=${apiId}`;
+        // console.log(fullURL)
+        
+        fetch(fullURL)
+        .then((res)=> res.json())
+        .then((data)=> {
+            if (data && data.list) {
+                console.log(data);
+                setValuePresent(true)
+                setWeatherData(data)
+                setWeatherDataList(data.list);
+                setTempDescription(data.list[0].weather[0].main)
+            }
+            if (location == '') {
+                toast.warn(data.message)
+            }
+            else if (data.cod == 404) {
+                toast.warn('City Not Found')
+            }
+        })
 
 
-        if (data && data.list) {
-            // console.log(data);
-            setValuePresent(true)
-            setWeatherData(data)
-            setWeatherDataList(data.list);
-            setTempDescription(data.list[0].weather[0].main)
-        }
-        if (location == '') {
-            toast.warn(data.message)
-        }
-        else if (data.cod == 404) {
-            toast.warn('City Not Found')
-        }
+        
     };
 
 
